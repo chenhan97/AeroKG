@@ -3,6 +3,7 @@ import torch.nn as nn
 from transformers import (RobertaTokenizer, RobertaModel)
 from pytorch_transformers.modeling_bert import BertEncoder
 from torch.nn import CrossEntropyLoss, MSELoss
+import os
 default_device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 class Adapter(nn.Module):
@@ -164,4 +165,3 @@ class AdapterModel(nn.Module):
         # If we save using the predefined names, we can load using `from_pretrained`
         output_model_file = os.path.join(save_directory, "pytorch_model.bin")
         torch.save(model_to_save.state_dict(), output_model_file)
-        logger.info("Saving model checkpoint to %s", save_directory)
